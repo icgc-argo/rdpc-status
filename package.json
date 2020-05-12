@@ -1,0 +1,19 @@
+{
+  "name": "rdpc-status",
+  "version": "1.0.0",
+  "description": "An overall cluster health and performance statistics API",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icgc-argo/rdpc-status.git"
+  },
+  "author": "Alex Lepsa (@lepsalex)",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/icgc-argo/rdpc-status/issues"
+  },
+  "homepage": "https://github.com/icgc-argo/rdpc-status#readme"
+}
