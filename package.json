@@ -4,9 +4,9 @@
   "description": "An overall cluster health and performance statistics API",
   "main": "index.ts",
   "scripts": {
-    "dev": "nodemon --watch src/**/*.ts --exec ts-node src/index.ts",
+    "dev": "nodemon --watch src/**/*.ts --exec ts-node -r dotenv/config src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "node -r dotenv/config dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/icgc-argo/rdpc-status#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "graphql-request": "^1.8.2"
   },
   "devDependencies": {
     "typescript": "^3.8.3",
