@@ -1,12 +1,12 @@
 {
   "name": "rdpc-status",
-  "version": "1.0.0",
+  "version": "1.0.0-SNAPSHOT",
   "description": "An overall cluster health and performance statistics API",
   "main": "index.ts",
   "scripts": {
     "dev": "nodemon --watch src/**/*.ts --exec ts-node -r dotenv/config src/index.ts",
     "build": "tsc",
-    "start": "node -r dotenv/config dist/index.js",
+    "start": "NODE_ENV=production NODE_PATH=./dist node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
