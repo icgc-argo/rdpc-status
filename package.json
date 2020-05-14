@@ -1,6 +1,6 @@
 {
   "name": "rdpc-status",
-  "version": "1.0.0-SNAPSHOT",
+  "version": "1.0.0",
   "description": "An overall cluster health and performance statistics API",
   "main": "index.ts",
   "scripts": {
