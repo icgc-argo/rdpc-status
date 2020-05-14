@@ -6,7 +6,7 @@ type Run = {
 
 export const cel = (runs: [Run]) => {
   const limit = process.env.CEL_LIMIT || 3;
-  const rangeInDays = process.env.CEL_RANGE_DAYS || 3;
+  const rangeInDays = process.env.CEL_RANGE_DAYS || 2;
 
   const now = new Date();
 
@@ -28,6 +28,10 @@ export const cel = (runs: [Run]) => {
 
   return {
     cel: celCount >= limit,
+    config: {
+      limit,
+      rangeInDays
+    },
     count: celCount,
     runs: celRuns,
   };
