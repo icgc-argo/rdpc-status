@@ -28,6 +28,10 @@ export const cel = (runs: [Run]) => {
 
   return {
     cel: celCount >= limit,
+    config: {
+      limit,
+      rangeInDays
+    },
     count: celCount,
     runs: celRuns,
   };
