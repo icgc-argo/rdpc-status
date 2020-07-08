@@ -1,5 +1,6 @@
 def dockerHubRepo = "icgcargo/rdpc-status"
-def githubRepo = "icgc-argo/rdpc-status"
+def gitHubRepo = "icgc-argo/rdpc-status"
+def chartVersion = "0.1.0"
 def commit = "UNKNOWN"
 def version = "UNKNOWN"
 
@@ -70,6 +71,22 @@ spec:
             }
         }
 
+        stage('deploy to rdpc-collab-dev') {
+            when {
+// Change branch to develop after successful testing
+                branch "2020-07-08-add-jenkins-deploy-stage"
+            }
+            steps {
+                build(job: "/provision/helm", parameters: [
+                    [$class: 'StringParameterValue', name: 'AP_RDPC_ENV', value: 'dev' ],
+                    [$class: 'StringParameterValue', name: 'AP_CHART_NAME', value: 'rdpc-status'],
+                    [$class: 'StringParameterValue', name: 'AP_RELEASE_NAME', value: 'rdpc-status'],
+                    [$class: 'StringParameterValue', name: 'AP_HELM_CHART_VERSION', value: "${chartVersion}"],
+                    [$class: 'StringParameterValue', name: 'AP_ARGS_LINE', value: "--set-string image.tag=${version}-${commit}" ]
+                ])
+            }
+        }
+
         stage('Build latest') {
             when {
                 branch "master"
@@ -78,7 +95,7 @@ spec:
                 container('docker') {
                     withCredentials([usernamePassword(credentialsId: 'argoGithub', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh "git tag ${version}"
-                        sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${githubRepo} --tags"
+                        sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${gitHubRepo} --tags"
                     }
                     withCredentials([usernamePassword(credentialsId:'argoDockerHub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh 'docker login -u $USERNAME -p $PASSWORD'
