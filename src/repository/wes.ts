@@ -26,9 +26,11 @@ export const errorReport = (size = 100) =>
   client.request(`
 {
     runs(page: {from: 0, size: ${size}}, filter: {state: "EXECUTOR_ERROR"}) {
-        runName
-        state
-        completeTime
+        content {
+          runName
+          state
+          completeTime
+        }
     }
 }
 `);
